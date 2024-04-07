@@ -1,109 +1,23 @@
-*Psst �looking for a more complete solution? Check out [SvelteKit](https://kit.svelte.dev), the official framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.*
+# Youvanced
 
-*Looking for a shareable component template instead? You can [use SvelteKit for that as well](https://kit.svelte.dev/docs#packaging) or the older [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+유튜브 영상을 광고 없이 시청할 수 있는 로컬 HTML 파일
 
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
+주소만 복사하시면 localhost 에서 광고없이 시청할 수 있음
 
 ## Get started
 
-Install the dependencies...
+Download ZIP >> 압축 해제 후 ./public/index.html 파일을 브라우저로 열기
 
-```bash
-cd svelte-app
-npm install
-```
+유튜브 영상의 URL 을 복사해 상단 navbar 에 입력하면 영상을 embedded 태그로 불러와 광고 없이 시청 가능
 
-...then start [Rollup](https://rollupjs.org):
+(단, 영상게시자가 Youtube 외 사이트에서 시청할 수 없도록 차단한 경우에는 시청 불가)
 
-```bash
-npm run dev
-```
+## Etc, and more etc...
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+본래는 Adblock 유튜브 광고차단 사태 때 영상시청을 위해 만들었으나
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+가격인상에 반발이 있는 사용자들은 그냥 가져가서 사용 및 시청하여도 무관
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+이거 이용한다고 차단당할 가능성은 유튜브가 localhost 를 찾아내 사용자에게 제재를 가할 가능성 또는 embedded 를 이용한 외부영상재생을 중지할 가능성과 동일
 
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+어지간해서는 차단이나 경고 등을 받을 가능성은 극히 낮으나 그럼에도 불안하다면 크롬이 아닌 엣지 등 다른 브라우저의 Secret 모드 도는 inPrivate 모드를 사용을 권장
