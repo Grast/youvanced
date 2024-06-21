@@ -3,6 +3,7 @@
 
 	let url = writable("");
 	let v;
+	let start;
 
 	const isValidId = () => v != null && v.length == 11;
 
@@ -13,6 +14,8 @@
 	url.subscribe((value) => {
 		let protocolList = ["http://", "https://"];
 		let flag = false;
+		let querystring = [ ...value.substring(value.indexOf("?") + 1)?.split("&") ];
+		console.log("querystring: ", querystring);
 
 		for (let protocol of protocolList) {
 			if (value.startsWith(protocol)) {
@@ -42,6 +45,8 @@
 		value = value.substring(0, 11);
 
 		v = value;
+
+		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length);
 	});
 </script>
 
@@ -74,7 +79,7 @@
 	<iframe
 		width="1280"
 		height="720"
-		src="https://www.youtube.com/embed/{v}"
+		src="https://www.youtube-nocookie.com/embed/{v + (start? "?start=" + start: "")}"
 		title="YouTube video player"
 		frameborder="0"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
