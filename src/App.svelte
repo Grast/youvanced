@@ -14,7 +14,10 @@
 	url.subscribe((value) => {
 		let protocolList = ["http://", "https://"];
 		let flag = false;
-		let querystring = [ ...value.substring(value.indexOf("?") + 1)?.split("&") ];
+		let querystring = [];
+		if(value.indexOf("?") > -1) {
+			querystring = [ ...value.substring(value.indexOf("?") + 1)?.split("&") ]
+		}
 		console.log("querystring: ", querystring);
 
 		for (let protocol of protocolList) {
@@ -25,6 +28,7 @@
 		}
 
 		if(!flag) {
+			v = null;
 			return false;
 		}
 		flag = false;
@@ -39,14 +43,14 @@
 		}
 
 		if(!flag) {
+			v = null;
 			return false;
 		}
 
 		value = value.substring(0, 11);
 
 		v = value;
-
-		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length);
+		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length).replaceAll(/[^0-9]*/gi, "");
 	});
 </script>
 
@@ -68,22 +72,24 @@
 	<blockquote class="col s12">
 		<h1 class="text-primary">Youvanced</h1>
 		<p class="text-primary">
-			How to enjoy youtube video with AdBlock without being zombie pc of Google as your PC<br/>
-			We won't hope to attack AdBlock and AdGuard Service as DDoS
+			We against youtube's rude behavior that ignoring each country's ad reivew policy calling &quot;Global One Build&quot;.<br/>
+			Youtube must follow to ad review policy of each country even if all policy were different on each country.
 		</p>
 	</blockquote>
 	<br />
 	<div class="divider" />
 	<br />
 	{#if v != null && v.length == 11 }
-	<iframe
-		width="1280"
-		height="720"
-		src="https://www.youtube-nocookie.com/embed/{v + (start? "?start=" + start: "")}"
-		title="YouTube video player"
-		frameborder="0"
-		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-		allowfullscreen
-	></iframe>
+	<div class="col s12 video-container">
+		<iframe
+			width="1280"
+			height="720"
+			src="https://www.youtube-nocookie.com/embed/{v + (start? "?start=" + start: "")}"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			allowfullscreen
+		></iframe>
+	</div>
 	{/if}
 </div>
