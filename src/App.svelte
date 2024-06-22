@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
 	import { writable } from "svelte/store";
 
 	let url = writable("");
@@ -8,6 +7,9 @@
 
 	const clearInput = () => {
 		$url = "";
+	};
+	const pasteClipboard = () => {
+		navigator.clipboard.readText().then(text => url.set(text));
 	};
 
 	url.subscribe((value) => {
@@ -50,20 +52,17 @@
 		v = value;
 		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length).replaceAll(/[^0-9]*/gi, "");
 	});
-
-	onMount(() => {
-		navigator.clipboard.readText().then(text => url.set(text));
-	});
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-invalid-attribute -->
 <nav class="col s12">
 	<div class="nav-wrapper">
 		<form class="col s12 container" on:submit={ () => { return false; } }>
 			<div class="input-field">
 				<input id="search" type="search" required bind:value={$url} />
 				<label class="label-icon" for="search">
-					<i class="material-icons">search</i>
+					<a href="javascript:void(0)" title="Paste Youtube Video Url From Clipboard (Need Browser Permission)" on:click={pasteClipboard}><i class="material-icons">search</i></a>
 				</label>
 				<i class="material-icons text-primary" on:click={clearInput}>close</i>
 			</div>
