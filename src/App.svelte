@@ -1,11 +1,10 @@
 <script>
+    import { onMount } from "svelte";
 	import { writable } from "svelte/store";
 
 	let url = writable("");
 	let v;
 	let start;
-
-	const isValidId = () => v != null && v.length == 11;
 
 	const clearInput = () => {
 		$url = "";
@@ -18,7 +17,6 @@
 		if(value.indexOf("?") > -1) {
 			querystring = [ ...value.substring(value.indexOf("?") + 1)?.split("&") ]
 		}
-		console.log("querystring: ", querystring);
 
 		for (let protocol of protocolList) {
 			if (value.startsWith(protocol)) {
@@ -51,6 +49,10 @@
 
 		v = value;
 		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length).replaceAll(/[^0-9]*/gi, "");
+	});
+
+	onMount(() => {
+		navigator.clipboard.readText().then(text => url.set(text));
 	});
 </script>
 
