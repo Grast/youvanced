@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import { writable } from "svelte/store";
 
 	let url = writable("");
@@ -52,7 +53,21 @@
 		v = value;
 		start = querystring.find(item => item.startsWith("t="))?.substring("t=".length).replaceAll(/[^0-9]*/gi, "");
 	});
+
+	const autoClipboard = async () => {
+		let clipboardText = await navigator.clipboard.readText();
+
+		if(clipboardText.startsWith("https://www.youtube.com/") || clipboardText.startsWith("https://youtu.be/")) {
+			url.set(clipboardText);
+		}
+	};
+
+	onMount(async () => {
+		autoClipboard();
+	});
 </script>
+
+<svelte:window on:focus={autoClipboard} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-invalid-attribute -->
